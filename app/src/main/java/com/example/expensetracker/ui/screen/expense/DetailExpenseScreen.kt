@@ -42,45 +42,49 @@ fun DetailExpenseScreen(showBottomSheet: MutableState<Boolean>,showBottomSheetMo
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Expense Transaction Details",
+            text = "Dettagli Spesa",
             fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
+            fontSize = 30.sp,
+            color = colorResource(id = R.color.background)
         )
         Spacer(Modifier.height(16.dp))
         Column(Modifier.fillMaxWidth()) {
             Text(
                 text = expense.description,
                 fontWeight = FontWeight.Medium,
-                color = Color.Gray
+                color = Color.Black
             )
             Text(
-                text = "USD. ${ConvertDecimal(expense.amount)}",
+                text = "EUR € ${ConvertDecimal(expense.amount)}",
                 fontWeight = FontWeight.Bold,
-                fontSize = 24.sp
+                fontSize = 26.sp,
+                color = Color.Green
             )
             Divider(Modifier.padding(vertical = 16.dp))
         }
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
-                text = "Category",
+                text = "Categoria",
                 fontWeight = FontWeight.Medium,
-                color = Color.Gray
+                color = Color.Black
             )
             Text(
                 text = expense.category,
                 fontWeight = FontWeight.Bold,
+                color = colorResource(id = R.color.background)
             )
         }
         Spacer(Modifier.height(16.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
-                text = "Date",
+                text = "Data",
                 fontWeight = FontWeight.Medium,
-                color = Color.Gray
+                color = Color.Black
             )
             Text(
                 text = DateConverter(expense.date),
                 fontWeight = FontWeight.Bold,
+                color = colorResource(id = R.color.background)
             )
         }
         Spacer(Modifier.height(30.dp))
@@ -99,7 +103,7 @@ fun DetailExpenseScreen(showBottomSheet: MutableState<Boolean>,showBottomSheetMo
             ) {
                 Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit")
                 Spacer(Modifier.width(10.dp))
-                Text(text = "Modify", fontWeight = FontWeight.Bold)
+                Text(text = "Modifica", fontWeight = FontWeight.Bold)
             }
             Spacer(Modifier.width(8.dp))
             Button(
@@ -114,9 +118,9 @@ fun DetailExpenseScreen(showBottomSheet: MutableState<Boolean>,showBottomSheetMo
                 ),
                 modifier = Modifier.fillMaxWidth(1f)
             ) {
-                Icon(imageVector = Icons.Default.Delete, contentDescription = "Edit")
+                Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
                 Spacer(Modifier.width(10.dp))
-                Text(text = "Delete", fontWeight = FontWeight.Bold)
+                Text(text = "Cancella", fontWeight = FontWeight.Bold)
             }
         }
     }

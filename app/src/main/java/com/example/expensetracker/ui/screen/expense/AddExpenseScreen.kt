@@ -46,10 +46,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Gray
+import androidx.compose.ui.graphics.Color.Companion.DarkGray
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -91,22 +97,23 @@ fun AddExpenseScreen(
                 viewModel.resetState()
             },
             colors = IconButtonDefaults.iconButtonColors(
-                containerColor = colorResource(id = R.color.secondary)
+                containerColor = colorResource(id = R.color.background)
             )
         ) {
-            Icon(imageVector = Icons.Default.Close, contentDescription = "Close")
+            Icon(imageVector = Icons.Default.Close, contentDescription = "Close", tint = White)
         }
         Spacer(Modifier.height(16.dp))
         Text(
-            text = if (isUpdate) "Modify Expense" else "Add New Expense",
+            text = if (isUpdate) "Modifica Spesa" else "Aggiungi Spesa",
             fontSize = 28.sp,
-            fontWeight = FontWeight(600)
+            fontWeight = FontWeight(600),
+            color = colorResource(id = R.color.background)
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "Enter the detail of your expense to help you to track your spending",
+            text = "Inserisci i dettagli della tua spesa, come importo, descrizione, data e categoria.",
             fontSize = 18.sp,
-            color = Color.Gray,
+            color = Gray,
         )
         Spacer(Modifier.height(16.dp))
         InputForm(showBottomSheet, viewModel, isUpdate, expense.id)
@@ -121,11 +128,11 @@ fun InputForm(
     id: Long
 ) {
     val scope = rememberCoroutineScope()
-    var showDialogCategories = remember { mutableStateOf(false) }
-    var showDialogDate = remember { mutableStateOf(false) }
+    val showDialogCategories = remember { mutableStateOf(false) }
+    val showDialogDate = remember { mutableStateOf(false) }
 
     Column {
-        Text(text = "Enter Amount", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Importo", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Black)
         Spacer(Modifier.height(8.dp))
         OutlinedTextField(
             modifier = Modifier
@@ -143,14 +150,15 @@ fun InputForm(
                 viewModel.onStateChange(amount = if(it.isBlank())0 else it.toInt())
             },
             leadingIcon = {
-                Text(text = "USD")
+                Text(text = "EUR", color = colorResource(id = R.color.background))
+
             },
-            placeholder = { Text(text = "10.000", color = Color.Gray) },
+            placeholder = { Text(text = "10.000", color = DarkGray) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
         )
         Spacer(Modifier.height(16.dp))
-        Text(text = "Description", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Descrizione", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Black)
         Spacer(Modifier.height(8.dp))
         OutlinedTextField(
             modifier = Modifier
@@ -165,11 +173,11 @@ fun InputForm(
             ),
             value = viewModel.expenseState.description,
             onValueChange = { viewModel.onStateChange(desc = it) },
-            placeholder = { Text(text = "Burger King And Coca Cola", color = Color.Gray) },
+            placeholder = { Text(text = "Burger King e Coca Cola", color = DarkGray) },
             singleLine = true
         )
         Spacer(Modifier.height(16.dp))
-        Text(text = "Category", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Categoria", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Black)
         Spacer(Modifier.height(8.dp))
         Button(
             onClick = { showDialogCategories.value = true },
@@ -200,7 +208,8 @@ fun InputForm(
                     Text(
                         text = viewModel.expenseState.category,
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = Black
                     )
                 }
                 Icon(
@@ -211,7 +220,7 @@ fun InputForm(
             }
         }
         Spacer(Modifier.height(16.dp))
-        Text(text = "Date", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Data", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Black)
         Spacer(Modifier.height(8.dp))
         Button(
             onClick = { showDialogDate.value = true },
@@ -237,7 +246,7 @@ fun InputForm(
                     text = DateConverter(viewModel.expenseState.date),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
-                    color = Color.Gray
+                    color = DarkGray
                 )
                 Icon(
                     imageVector = Icons.Default.DateRange,
@@ -280,9 +289,10 @@ fun InputForm(
             }
         ) {
             Text(
-                text = if (isUpdate) "Update Expense" else "Add Expense",
+                text = if (isUpdate) "Aggiorna Spesa" else "Aggiungi Spesa",
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                color = White
             )
         }
     }
@@ -315,10 +325,12 @@ fun CategoryDialog(viewModel: MainViewModel, showDialog: MutableState<Boolean>) 
             ) {
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = "Select Your Category",
+                    text = "Seleziona la Categoria",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Medium,
-                    modifier = Modifier.padding(horizontal = 20.dp)
+                    modifier = Modifier.padding(horizontal = 20.dp),
+                    color = Black,
+                    textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 LazyVerticalGrid(columns = GridCells.Fixed(2), Modifier.padding(bottom = 16.dp)) {
@@ -354,7 +366,7 @@ fun CategoryDialog(viewModel: MainViewModel, showDialog: MutableState<Boolean>) 
                                     text = title,
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Medium,
-                                    color = if (isSelected) Color.White else Color.Gray
+                                    color = if (isSelected) Color.White else Gray
                                 )
                             }
                         }
