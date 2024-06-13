@@ -62,21 +62,21 @@ fun OnBoardingScreen(rootNavController:NavHostController,viewModel: MainViewMode
                 0 ->{
                     imagePainter = R.drawable.undraw_mobile_content_xvgr
                     heightImage = 300
-                    title = "Benvenuto nel Tracciatore di Spese"
-                    description = "Easily manage your finances. Expense Tracker helps you record and manage your daily expenses effortlessly"
+                    title = "Benvenuto nel Tracciatore di Spese 💵"
+                    description = "Gestisci facilmente le tue spese. Tracciatore di Spese ti aiuta a registrare e gestire le tue spese quotidiane senza sforzo!"
                 }
                 1->{
                     imagePainter = R.drawable.stat
                     heightImage = 200
-                    title = "Record Expenses Quickly"
-                    description = "Expense Tracker makes daily expense tracking a breeze. Just a few taps to record your transactions"
+                    title = "Registra le tue spese Velocemente ↩️"
+                    description = "Expense Tracker rende il monitoraggio delle spese quotidiane un gioco da ragazzi. Bastano pochi passaggi per registrare le tue transazioni!"
 
                 }
                 2->{
                     imagePainter = R.drawable.real_time
                     heightImage = 260
-                    title = "Real-time Financial Monitoring"
-                    description = "Monitor your finances instantly. Expense Tracker provides clear insights with informative graphs and reports for wise financial decisions"
+                    title = "Monitoraggio delle spese in tempo reale ⌚"
+                    description = "Monitora istantaneamente le tue finanze. Expense Tracker fornisce informazioni chiare con grafici e report informativi!"
                 }
             }
                 OnBoardingItem(imagePainter = imagePainter, heightImage = heightImage, title = title, description = description)
@@ -94,7 +94,7 @@ fun OnBoardingScreen(rootNavController:NavHostController,viewModel: MainViewMode
                     contentColor = Color.White
                 )
             ) {
-                Text(text = "Get Started", fontSize = 20.sp, fontWeight = FontWeight.Medium)
+                Text(text = "Partiamo 👍", fontSize = 20.sp, fontWeight = FontWeight.Medium)
             }
         }else{
             IndicatorNavigation(pagerState,scope)
@@ -142,7 +142,7 @@ fun IndicatorNavigation(pagerState: PagerState,scope:CoroutineScope){
                     Modifier
                         .size(18.dp)
                         .clip(shape = CircleShape)
-                        .background(color = if (selected) Color.Black else Color.Gray)
+                        .background(color = if (selected) Color.Black else Color.White)
                         .clickable {
                             scope.launch {
                                 pagerState.animateScrollToPage(it)

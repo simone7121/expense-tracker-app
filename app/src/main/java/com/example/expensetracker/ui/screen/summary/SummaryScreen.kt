@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.expensetracker.R
 import com.example.expensetracker.data.Expense
+import com.example.expensetracker.ui.theme.Black
 import com.example.expensetracker.ui.util.ConvertDecimal
 import com.example.expensetracker.ui.util.MainViewModel
 import com.example.expensetracker.ui.util.TabSummaryList
@@ -58,9 +59,10 @@ fun SummaryScreen(innerPadding:PaddingValues = PaddingValues(20.dp),viewModel: M
             .padding(innerPadding)
             .padding(10.dp)) {
         Text(
-            text = "Your Summary",
+            text = "Il tuo Resoconto",
             fontSize = 30.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = colorResource(id = R.color.background)
         )
         Spacer(Modifier.height(16.dp))
         Tabs(tabIndex)
@@ -70,14 +72,15 @@ fun SummaryScreen(innerPadding:PaddingValues = PaddingValues(20.dp),viewModel: M
                 Spacer(modifier = Modifier.height(48.dp))
                 Image(
                     painter = painterResource(id = R.drawable.undraw_no_data_re_kwbl),
-                    contentDescription = "No Expense Yet",
+                    contentDescription = "Nessuna Spesa Registrata",
                     modifier = Modifier.size(200.dp)
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = "No Expense Yet",
+                    text = "Nessuna Spesa Registrata",
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
+                    color = Black
                 )
             }
         }else{
@@ -143,9 +146,9 @@ fun CardSummaryItem(categories:String,expenseList: State<List<Expense>>,totalAmo
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp),
+            .height(60.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = Color.Black
         )
     ) {
         Row(
@@ -181,13 +184,15 @@ fun CardSummaryItem(categories:String,expenseList: State<List<Expense>>,totalAmo
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = "$ ${ConvertDecimal(amountCategory)}",
-                    fontWeight = FontWeight.Bold
+                    text = "€ ${ConvertDecimal(amountCategory)}",
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Green
                 )
                 Text(
-                    text = "${percentage.toInt()}%",
+                    text = "${percentage.toInt()} %",
                     color = Color.Gray,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 13.sp
                 )
             }
         }
