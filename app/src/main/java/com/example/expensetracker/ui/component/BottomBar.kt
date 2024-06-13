@@ -25,8 +25,10 @@ fun BottomBar(mainNavController:NavHostController,navBackStackEntry: NavBackStac
             NavigationBarItem(
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = Color.White,
-                    unselectedIconColor = Color(0xFFACB1D6),
-                    unselectedTextColor = Color(0xFFACB1D6)
+                    unselectedIconColor = Color.Gray,
+                    unselectedTextColor = Color.Gray,
+                    selectedIconColor = Color.Black,
+                    selectedTextColor = Color.Black
                 ),
                 selected = isSelected,
                 label = { Text(text = items.title)},

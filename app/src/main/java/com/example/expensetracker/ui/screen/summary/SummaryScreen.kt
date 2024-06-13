@@ -143,6 +143,7 @@ fun CardSummaryItem(categories:String,expenseList: State<List<Expense>>,totalAmo
     } else {
         0.0
     }
+    Spacer(Modifier.height(10.dp))
     Card(
         modifier = Modifier
             .fillMaxWidth()

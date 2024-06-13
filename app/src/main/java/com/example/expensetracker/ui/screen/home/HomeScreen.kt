@@ -65,11 +65,11 @@ fun HomeScreen(
         Modifier
             .fillMaxSize()
             .padding(innerPadding)
-            .padding(10.dp)) {
+            .padding(15.dp)) {
         Tabs(viewModel.tabIndexState, viewModel = viewModel)
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(12.dp))
         SummaryBox(viewModel.tabIndexState,expenseList)
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(20.dp))
         ListSummary(viewModel = viewModel,expenseList)
 
     }
@@ -114,15 +114,15 @@ fun SummaryBox(tabIndex:Int, expenseList: State<List<Expense>>){
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Spend So Far ${TabsMap[tabIndex]!!}",
+            text = "Totale ${TabsMap[tabIndex]!!}",
             color = Color.White,
-            fontSize = 16.sp,
+            fontSize = 25.sp,
             fontWeight = FontWeight.Medium
         )
         Text(
-            text = "$ ${ConvertDecimal(expenseListSummary)}",
-            color = Color.White,
-            fontSize = 40.sp,
+            text = "€ ${ConvertDecimal(expenseListSummary)}",
+            color = Color.Green,
+            fontSize = 35.sp,
             fontWeight = FontWeight.Medium,
         )
     }
@@ -131,25 +131,29 @@ fun SummaryBox(tabIndex:Int, expenseList: State<List<Expense>>){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListSummary(viewModel:MainViewModel, expenseList: State<List<Expense>>){
-    Column{
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
-            text = "Today , ${DateConverter(System.currentTimeMillis())}",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Medium
+            text = DateConverter(System.currentTimeMillis()),
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Medium,
+            color = Color.Black
         )
         if(expenseList.value.isEmpty()){
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
                 Spacer(modifier = Modifier.height(48.dp))
                 Image(
                     painter = painterResource(id = R.drawable.undraw_no_data_re_kwbl),
-                    contentDescription = "No Expense Yet",
+                    contentDescription = "Nessuna Spesa Registrata",
                     modifier = Modifier.size(200.dp)
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = "No Expense Yet",
+                    text = "Nessuna Spesa Registrata",
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black
                 )
             }
         }else{
@@ -171,14 +175,14 @@ fun CardItem(expense: Expense,viewModel: MainViewModel){
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
     )
-    Spacer(Modifier.height(16.dp))
+    Spacer(Modifier.height(10.dp))
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
             .clickable { showBottomSheetDetail.value = true },
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = Color.Black
         )
     ) {
         Row(
@@ -203,14 +207,15 @@ fun CardItem(expense: Expense,viewModel: MainViewModel){
                     )
                     Text(
                         text = DateConverter(expense.date),
-                        color = Color.Gray,
+                        color = colorResource(id = R.color.background),
                         fontWeight = FontWeight.Medium
                     )
                 }
             }
             Text(
-                text = "$ ${ConvertDecimal(expense.amount)}",
-                fontWeight = FontWeight.Medium
+                text = "€ ${ConvertDecimal(expense.amount)}",
+                fontWeight = FontWeight.Medium,
+                color = Color.Green,
             )
         }
         if(showBottomSheetDetail.value){
