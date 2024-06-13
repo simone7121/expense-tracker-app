@@ -23,7 +23,7 @@ import com.example.expensetracker.ui.component.FloatingButton
 import com.example.expensetracker.ui.component.TopBar
 import com.example.expensetracker.ui.screen.expense.AddExpenseScreen
 import com.example.expensetracker.ui.screen.home.HomeScreen
-import com.example.expensetracker.ui.screen.summary.SummaryScreen
+import com.example.expensetracker.ui.screen.sommario.SommarioScreen
 import com.example.expensetracker.ui.util.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +36,7 @@ fun MainScreen(viewModel: MainViewModel){
         skipPartiallyExpanded = true,
     )
 
-    var showBottomSheet = remember { mutableStateOf(false) }
+    val showBottomSheet = remember { mutableStateOf(false) }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = colorResource(id = R.color.secondary),
@@ -50,7 +50,7 @@ fun MainScreen(viewModel: MainViewModel){
         innerPadding ->
         NavHost(navController = mainNavController, startDestination = "home" ){
             composable(route="home"){ HomeScreen(innerPadding = innerPadding, viewModel = viewModel) }
-            composable(route="summary"){ SummaryScreen(innerPadding = innerPadding, viewModel = viewModel) }
+            composable(route="sommario"){ SommarioScreen(innerPadding = innerPadding, viewModel = viewModel) }
         }
         if (showBottomSheet.value) {
             ModalBottomSheet(

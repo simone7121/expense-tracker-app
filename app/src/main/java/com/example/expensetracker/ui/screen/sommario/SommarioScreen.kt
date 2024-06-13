@@ -1,4 +1,4 @@
-package com.example.expensetracker.ui.screen.summary
+package com.example.expensetracker.ui.screen.sommario
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -43,11 +43,11 @@ import com.example.expensetracker.data.Expense
 import com.example.expensetracker.ui.theme.Black
 import com.example.expensetracker.ui.util.ConvertDecimal
 import com.example.expensetracker.ui.util.MainViewModel
-import com.example.expensetracker.ui.util.TabSummaryList
+import com.example.expensetracker.ui.util.TabsommarioList
 import com.example.expensetracker.ui.util.categoriesImage
 
 @Composable
-fun SummaryScreen(innerPadding:PaddingValues = PaddingValues(20.dp),viewModel: MainViewModel){
+fun SommarioScreen(innerPadding:PaddingValues = PaddingValues(20.dp), viewModel: MainViewModel){
     var tabIndex = remember{ mutableIntStateOf(0) }
     val expenseList = when (tabIndex.value) {
         0-> viewModel.getAllExpenseMonth.collectAsState(initial = listOf())
@@ -84,7 +84,7 @@ fun SummaryScreen(innerPadding:PaddingValues = PaddingValues(20.dp),viewModel: M
                 )
             }
         }else{
-            SummaryList(expenseList)
+            sommarioList(expenseList)
         }
 
     }
@@ -95,7 +95,7 @@ fun Tabs(tabIndex:MutableIntState){
     Row(
         modifier = Modifier.fillMaxWidth(),
     ) {
-        TabSummaryList.forEachIndexed(){
+        TabsommarioList.forEachIndexed(){
                 index,items ->
             val isSelected = tabIndex.value == index
             OutlinedButton(
@@ -115,7 +115,7 @@ fun Tabs(tabIndex:MutableIntState){
 }
 
 @Composable
-fun SummaryList(expenseList: State<List<Expense>>){
+fun sommarioList(expenseList: State<List<Expense>>){
     val uniqueCategories = expenseList.value.map { it.category }.distinct()
     val totalAmount = expenseList.value.sumOf { it.amount }
     Column(
@@ -129,14 +129,14 @@ fun SummaryList(expenseList: State<List<Expense>>){
         LazyColumn {
             items(uniqueCategories){
                 categories ->
-                CardSummaryItem(categories,expenseList,totalAmount)
+                CardsommarioItem(categories,expenseList,totalAmount)
             }
         }
     }
 }
 
 @Composable
-fun CardSummaryItem(categories:String,expenseList: State<List<Expense>>,totalAmount:Int){
+fun CardsommarioItem(categories:String,expenseList: State<List<Expense>>,totalAmount:Int){
     val amountCategory =  expenseList.value.filter { it.category == categories }.sumOf { it.amount }
     val percentage = if (totalAmount != 0) {
         (amountCategory.toDouble() / totalAmount) * 100

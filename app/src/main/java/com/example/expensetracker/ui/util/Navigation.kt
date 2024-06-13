@@ -20,7 +20,7 @@ val itemsNavigation = listOf<NavigationItem>(
         unSelectedIcon = Icons.Outlined.Home
     ),
     NavigationItem(
-        title = "Summary",
+        title = "Sommario",
         selectedIcon = Icons.Filled.Menu,
         unSelectedIcon = Icons.Outlined.Menu
     ),

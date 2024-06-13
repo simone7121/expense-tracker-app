@@ -16,7 +16,7 @@ val TabsMap = mapOf<Int,String>(
     2 to "Quest'anno"
 )
 
-val TabSummaryList = listOf<TabsItem>(
+val TabsommarioList = listOf<TabsItem>(
     TabsItem("Mensile"),
     TabsItem("Annuale")
 )
