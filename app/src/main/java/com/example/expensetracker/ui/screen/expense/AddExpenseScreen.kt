@@ -53,6 +53,7 @@ import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -143,19 +144,20 @@ fun InputForm(
                 focusedIndicatorColor = colorResource(id = R.color.tertiary),
                 focusedContainerColor = colorResource(id = R.color.secondary),
                 unfocusedContainerColor = colorResource(id = R.color.secondary),
-                unfocusedIndicatorColor = colorResource(id = R.color.secondary),
+                unfocusedIndicatorColor = colorResource(id = R.color.secondary)
             ),
             value = viewModel.expenseState.amount.toString(),
             onValueChange = {
                 viewModel.onStateChange(amount = if(it.isBlank())0 else it.toInt())
             },
+            textStyle = TextStyle(color = Black),
             leadingIcon = {
-                Text(text = "EUR", color = colorResource(id = R.color.background))
+                Text(text = "€", color = colorResource(id = R.color.background))
 
             },
-            placeholder = { Text(text = "10.000", color = DarkGray) },
+            placeholder = { Text(text = "10.000", color = Black) },
             singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
         )
         Spacer(Modifier.height(16.dp))
         Text(text = "Descrizione", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Black)
@@ -173,7 +175,8 @@ fun InputForm(
             ),
             value = viewModel.expenseState.description,
             onValueChange = { viewModel.onStateChange(desc = it) },
-            placeholder = { Text(text = "Burger King e Coca Cola", color = DarkGray) },
+            textStyle = TextStyle(color = Black),
+            placeholder = { Text(text = "Inserisci Descrizione", color = Gray) },
             singleLine = true
         )
         Spacer(Modifier.height(16.dp))
@@ -189,7 +192,7 @@ fun InputForm(
             shape = RoundedCornerShape(20),
             colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(id = R.color.secondary),
-                contentColor = Color.Black
+                contentColor = Black
             ),
         ) {
             Row(
@@ -246,7 +249,7 @@ fun InputForm(
                     text = DateConverter(viewModel.expenseState.date),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
-                    color = DarkGray
+                    color = Black
                 )
                 Icon(
                     imageVector = Icons.Default.DateRange,
@@ -392,7 +395,7 @@ fun DateDialog(showDialog: MutableState<Boolean>, viewModel: MainViewModel) {
                 }
             ) {
                 viewModel.onStateChange(date = state.selectedDateMillis)
-                Text("OK")
+                Text("Conferma")
             }
         },
         dismissButton = {
@@ -401,11 +404,11 @@ fun DateDialog(showDialog: MutableState<Boolean>, viewModel: MainViewModel) {
                     showDialog.value = false
                 }
             ) {
-                Text("CANCEL")
+                Text("Annulla")
             }
         },
         colors = DatePickerDefaults.colors(
-            containerColor = Color.White
+            containerColor = Color.Black,
         )
     ) {
         DatePicker(
