@@ -23,9 +23,10 @@ fun TopBar(){
         ),
         title = {
             Text(
-                text = "Expense Tracker",
+                text = "Tracciatore Spese",
                 modifier = Modifier.padding(16.dp),
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                color = Color.Black
             ) },
     )
 }

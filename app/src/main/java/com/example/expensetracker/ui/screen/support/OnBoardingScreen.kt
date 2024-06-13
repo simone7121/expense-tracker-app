@@ -62,7 +62,7 @@ fun OnBoardingScreen(rootNavController:NavHostController,viewModel: MainViewMode
                 0 ->{
                     imagePainter = R.drawable.undraw_mobile_content_xvgr
                     heightImage = 300
-                    title = "Welcome to Expense Tracker"
+                    title = "Benvenuto nel Tracciatore di Spese"
                     description = "Easily manage your finances. Expense Tracker helps you record and manage your daily expenses effortlessly"
                 }
                 1->{

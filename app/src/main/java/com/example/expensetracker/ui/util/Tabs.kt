@@ -5,18 +5,18 @@ data class TabsItem(
 )
 
 val TabsList = listOf<TabsItem>(
-    TabsItem("today"),
-    TabsItem("This Month"),
-    TabsItem("This Year")
+    TabsItem("Oggi"),
+    TabsItem("Questo Mese"),
+    TabsItem("Quest'anno")
 )
 
 val TabsMap = mapOf<Int,String>(
-    0 to  "Today",
-    1 to "This Month",
-    2 to "This Year"
+    0 to "Oggi",
+    1 to "Questo Mese",
+    2 to "Quest'anno"
 )
 
 val TabSummaryList = listOf<TabsItem>(
-    TabsItem("Month"),
-    TabsItem("Year")
+    TabsItem("Mensile"),
+    TabsItem("Annuale")
 )
