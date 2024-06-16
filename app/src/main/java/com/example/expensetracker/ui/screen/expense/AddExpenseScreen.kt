@@ -114,7 +114,7 @@ fun AddExpenseScreen(
         Text(
             text = "Inserisci i dettagli della tua spesa, come importo, descrizione, data e categoria.",
             fontSize = 18.sp,
-            color = Gray,
+            color = Black,
         )
         Spacer(Modifier.height(16.dp))
         InputForm(showBottomSheet, viewModel, isUpdate, expense.id)
